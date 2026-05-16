@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise ❤️</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ffd6e7,#fff0f6);
+overflow:hidden;
+}
+
+.container{
+width:90%;
+max-width:520px;
+background:white;
+padding:30px;
+border-radius:30px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+position:relative;
+overflow:hidden;
+animation:fade 1s ease;
+}
+
+h1{
+color:#ff4f87;
+font-size:2rem;
+margin-bottom:20px;
+}
+
+h2{
+color:#ff4f87;
+margin-bottom:20px;
+}
+
+p{
+font-size:18px;
+line-height:1.8;
+color:#444;
+}
+
+button{
+padding:12px 24px;
+margin:10px;
+border:none;
+border-radius:30px;
+background:#ff4f87;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.08);
+background:#ff2f73;
+}
+
+#count{
+font-size:100px;
+font-weight:bold;
+color:#ff4f87;
+}
+
+.emoji{
+font-size:70px;
+margin-top:20px;
+animation:bounce 1s infinite;
+}
+
+.heart{
+font-size:100px;
+cursor:pointer;
+animation:pulse 1s infinite;
+}
+
+.decor{
+position:absolute;
+font-size:30px;
+animation:float 3s infinite;
+}
+
+.decor1{top:10px;left:20px;}
+.decor2{top:10px;right:20px;}
+.decor3{bottom:20px;left:20px;}
+.decor4{bottom:20px;right:20px;}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:scale(0.8);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0);}
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.2);}
+100%{transform:scale(1);}
+}
+
+@keyframes bounce{
+0%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0);}
+}
+
+/* Flying Decorations */
+
+.fly{
+position:fixed;
+top:100%;
+font-size:35px;
+animation:flyUp 3s linear forwards;
+pointer-events:none;
+z-index:999;
+}
+
+@keyframes flyUp{
+0%{
+transform:translateY(0) rotate(0deg);
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) rotate(360deg);
+opacity:0;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container" id="screen">
+
+<div class="decor decor1">🎂</div>
+<div class="decor decor2">💖</div>
+<div class="decor decor3">✨</div>
+<div class="decor decor4">🎉</div>
+
+<div id="count">3</div>
+
+</div>
+
+<script>
+
+const screen = document.getElementById("screen");
+
+let num = 3;
+
+const countdown = setInterval(()=>{
+
+num--;
+
+if(num > 0){
+document.getElementById("count").innerHTML = num;
+}
+else{
+
+clearInterval(countdown);
+
+screen.innerHTML = `
+
+<div class="decor decor1">🎂</div>
+<div class="decor decor2">💖</div>
+<div class="decor decor3">✨</div>
+<div class="decor decor4">🎉</div>
+
+<h1>🎉 Happy Birthday My Future Husband ❤️</h1>
+
+<p>You are the best gift in my life 💕</p>
+
+<button onclick="q1()">Next ➜</button>
+
+`;
+
+}
+
+},1000);
+
+/* Celebration */
+
+function celebrate(){
+
+for(let i=0;i<30;i++){
+
+let fly = document.createElement("div");
+
+fly.classList.add("fly");
+
+fly.innerHTML = ["🎉","🎊","✨","💖"][Math.floor(Math.random()*4)];
+
+fly.style.left = Math.random()*100 + "vw";
+
+fly.style.animationDuration = (Math.random()*2+2)+"s";
+
+document.body.appendChild(fly);
+
+setTimeout(()=>{
+fly.remove();
+},3000);
+
+}
+
+}
+
+/* Show Emoji */
+
+function emoji(icon){
+
+document.getElementById("emoji").innerHTML = `
+<div class="emoji">${icon}</div>
+`;
+
+}
+
+/* Q1 */
+
+function q1(){
+
+screen.innerHTML = `
+
+<h2>Q1. ARE U READY CHELLO 😁</h2>
+
+<button onclick="correct(q2)">YES</button>
+
+<button onclick="emoji('😕')">NO</button>
+
+<div id="emoji"></div>
+
+`;
+
+}
+
+/* Q2 */
+
+function q2(){
+
+screen.innerHTML = `
+
+<h2>Q2. What is my favourite dishes 😁</h2>
+
+<button onclick="emoji('🫤')">Ice</button>
+
+<button onclick="emoji('🫤')">Chicken</button>
+
+<button onclick="correct(q3)">Amuthan</button>
+
+<div id="emoji"></div>
+
+`;
+
+}
+
+/* Q3 */
+
+function q3(){
+
+screen.innerHTML = `
+
+<h2>Q3. What name that I call u more time ❤️</h2>
+
+<button onclick="emoji('🫤')">Darling</button>
+
+<button onclick="correct(q4)">Chello</button>
+
+<button onclick="emoji('🫤')">Amu</button>
+
+<div id="emoji"></div>
+
+`;
+
+}
+
+/* Q4 */
+
+function q4(){
+
+screen.innerHTML = `
+
+<h2>Q4. What movie i like it 🎬</h2>
+
+<button onclick="correct(q5)">Hi nana</button>
+
+<button onclick="emoji('🫤')">Sita raman</button>
+
+<button onclick="emoji('🫤')">Premalu</button>
+
+<div id="emoji"></div>
+
+`;
+
+}
+
+/* Q5 */
+
+function q5(){
+
+screen.innerHTML = `
+
+<h2>Q5. Do you love me ❤️</h2>
+
+<button onclick="emoji('🫤')">Yes</button>
+
+<button onclick="correct(result)">Yessssssssssssssssss</button>
+
+<div id="emoji"></div>
+
+`;
+
+}
+
+/* Correct Answer */
+
+function correct(next){
+
+celebrate();
+
+setTimeout(()=>{
+next();
+},1500);
+
+}
+
+/* Result */
+
+function result(){
+
+screen.innerHTML = `
+
+<div class="decor decor1">🎉</div>
+<div class="decor decor2">💖</div>
+<div class="decor decor3">✨</div>
+<div class="decor decor4">🎂</div>
+
+<h1>🎊 WOW ALL ANSWERS CORRECT 🎊</h1>
+
+<p>I have to say you something 💌</p>
+
+<button onclick="nextMove()">Kepiyaa</button>
+
+<button onclick="emoji('😡')">Kekamatiyaaa</button>
+
+<div id="emoji"></div>
+
+`;
+
+}
+
+/* Heart */
+
+function nextMove(){
+
+screen.innerHTML = `
+
+<h1>Touch The Heart 🤍</h1>
+
+<div class="heart" onclick="message()">🤍</div>
+
+`;
+
+}
+
+/* Love Message */
+
+function message(){
+
+celebrate();
+
+screen.innerHTML = `
+
+<div class="decor decor1">💖</div>
+<div class="decor decor2">✨</div>
+<div class="decor decor3">🎉</div>
+<div class="decor decor4">💕</div>
+
+<h1>💌 Message For You 💌</h1>
+
+<p>
+
+Your like literally the best boyfriend I've had.
+I love you because you're sweet, cute, nice and funny.
+You make me super happy.
+You're the best thing that has ever happened to me and I hope I get to spend the rest of my life with you.
+You're such an amazing person and I love your personality.
+The littlest things you do make me happy.
+I hope you know that you mean everything to me.
+Your like my whole world and I love you so much.
+You're super cute and handsome and I love you 😘
+
+</p>
+
+<br>
+
+<button onclick="q6()">Next ❤️</button>
+
+`;
+
+}
+
+/* Final Question */
+
+function q6(){
+
+screen.innerHTML = `
+
+<h2>Q6. Again do you love me ❤️</h2>
+
+<button onclick="finalLove()">Yes</button>
+
+<button onclick="emoji('🥺')">No</button>
+
+<div id="emoji"></div>
+
+`;
+
+}
+
+/* Final Love */
+
+function finalLove(){
+
+celebrate();
+
+screen.innerHTML = `
+
+<div class="decor decor1">💖</div>
+<div class="decor decor2">🎉</div>
+<div class="decor decor3">✨</div>
+<div class="decor decor4">😘</div>
+
+<h1>❤️ I LOVE YOU TOO DA CHELLOOOOOOO ❤️</h1>
+
+<div class="emoji">🥰</div>
+
+`;
+
+}
+
+</script>
+
+</body>
+</html>
